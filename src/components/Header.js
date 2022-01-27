@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { User } from 'phosphor-react';
 
 const Header = () => {
   return (
-    <header className="section-header">
+    <header className="section-header sticky" id="sec-header">
       <Link className="header-logo" to="/">
         {/* Ol<span>xx</span> */}
         <img src="../olx-logo-main.png" alt="OLX" />
@@ -15,24 +16,11 @@ const Header = () => {
             <span>O'Z</span> | <span>РУ</span>
           </a>
         </li>
-        <li>
-          {' '}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon-md"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-            />
-          </svg>
+
+        <li className="my-profile flex-center">
+          <User className="icon-md" />
+          <span> Мой профиль</span>{' '}
         </li>
-        <li>Мой профиль</li>
 
         <li>
           <Link
