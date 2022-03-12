@@ -4,7 +4,6 @@ import { CaretRight } from 'phosphor-react';
 const Categories = () => {
   const toggleDropdown = (element, e) => {
     const elems = document.querySelectorAll('.helpclass');
-    console.log(elems);
     for (let i = 0; i < elems.length; i++) {
       elems[i].className = 'dropdown helpclass';
     }
@@ -35,15 +34,6 @@ const Categories = () => {
           document.getElementById('sec-cat').classList.remove('row-gap-seccat');
         }
       });
-
-    if (window.elems)
-      if (document.getElementById('sec-cat').classList.contains('flex')) {
-        const dropdowns = document.querySelectorAll('.dropdown');
-
-        for (let i = 0; i < dropdowns.length; i++) {
-          dropdowns[i].remove();
-        }
-      }
   });
   return (
     <>
@@ -76,14 +66,18 @@ const Categories = () => {
         </div>
         <div className="item">
           <div className="category-circle">
-            <img src="../auto.png" alt="Auto" className="category-circle-img" />
+            <img
+              src="../auto.webp"
+              alt="Auto"
+              className="category-circle-img"
+            />
           </div>
           <span onClick={() => toggleDropdown('auto')}>Авто</span>
         </div>
         <div className="item">
           <div className="category-circle">
             <img
-              src="../briefcase.png"
+              src="../briefcase.webp"
               alt="Briefcase"
               className="category-circle-img"
             />
@@ -93,7 +87,7 @@ const Categories = () => {
         <div className="item">
           <div className="category-circle">
             <img
-              src="../phone.png"
+              src="../phone.webp"
               alt="Phone"
               className="category-circle-img"
             />
@@ -113,8 +107,8 @@ const Categories = () => {
         <div className="item">
           <div className="category-circle">
             <img
-              src="../fashion.png"
-              alt="Baby Stroller"
+              src="../fashion.webp"
+              alt="Fashion"
               className="category-circle-img"
             />
           </div>

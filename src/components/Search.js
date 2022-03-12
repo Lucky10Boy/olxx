@@ -3,7 +3,19 @@ import { CaretRight, MagnifyingGlass, MapPin } from 'phosphor-react';
 import React, { useEffect } from 'react';
 
 const Search = () => {
-  useEffect(() => {});
+  useEffect(() => {
+    window.onclick = (e) => {
+      const dropdown = document.getElementById('loc-submenu');
+      if (
+        !e.target.matches('#geo-loc') &&
+        !e.target.matches('.search-location-dropdown')
+      ) {
+        if (dropdown.classList.contains('active')) {
+          dropdown.classList.remove('active');
+        }
+      }
+    };
+  });
   return (
     <section className="section-search">
       <div className="search-box">
@@ -18,14 +30,13 @@ const Search = () => {
             style={{ outline: 'none' }}
           />
         </div>
-        <div className="search-location-dropdown flex-center">
-          <MapPin
-            id="geo-loc"
-            className="icon-md"
-            onClick={() => {
-              document.getElementById('loc-submenu').classList.toggle('active');
-            }}
-          />
+        <div
+          className="search-location-dropdown flex-center"
+          onClick={() => {
+            document.getElementById('loc-submenu').classList.add('active');
+          }}
+        >
+          <MapPin id="geo-loc" className="icon-md" />
         </div>
         <button className="btn-search flex-center">
           <MagnifyingGlass className="icon-md" />
@@ -36,7 +47,7 @@ const Search = () => {
           <span className="close-btn">X</span>
           <div className="cols-locations">
             <ul className="first-column-locations column-ul">
-              <li>
+              <li id="1-li">
                 <a href="#">
                   <strong>Т</strong>
                   <span>ашкент</span>
@@ -67,7 +78,6 @@ const Search = () => {
               </li>
             </ul>
             <ul className="second-column-locations column-ul">
-              {' '}
               <li>
                 <a href="#">
                   <strong>К</strong>
@@ -76,7 +86,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>К</strong>
                   <span>ашкадарьинская область</span>
@@ -84,7 +93,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>Н</strong>
                   <span>авоийская область</span>
@@ -92,7 +100,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>Н</strong>
                   <span>аманганская область</span>
@@ -101,9 +108,7 @@ const Search = () => {
               </li>
             </ul>
             <ul className="third-column-locations column-ul">
-              {' '}
               <li>
-                {' '}
                 <a href="#">
                   <strong>С</strong>
                   <span>амаркандская область</span>
@@ -111,7 +116,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>С</strong>
                   <span>урхандарьинская область</span>
@@ -119,7 +123,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>С</strong>
                   <span>ырдарьинская область</span>
@@ -127,7 +130,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>Т</strong>
                   <span>ашкентская область</span>
@@ -136,9 +138,7 @@ const Search = () => {
               </li>
             </ul>
             <ul className="fourth-column-locations column-ul">
-              {' '}
               <li>
-                {' '}
                 <a href="#">
                   <strong>Ф</strong>
                   <span>ерганская область</span>
@@ -146,7 +146,6 @@ const Search = () => {
                 </a>
               </li>
               <li>
-                {' '}
                 <a href="#">
                   <strong>Х</strong>
                   <span>орезмская область</span>

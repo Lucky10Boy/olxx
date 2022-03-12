@@ -2,12 +2,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'phosphor-react';
+import { connect } from 'react-redux';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className="section-header sticky" id="sec-header">
       <Link className="header-logo" to="/">
-        {/* Ol<span>xx</span> */}
         <img src="../olx-logo-main.png" alt="OLX" />
       </Link>
       <ul className="header-nav">
@@ -19,13 +19,17 @@ const Header = () => {
 
         <li className="my-profile flex-center">
           <User className="icon-md" />
-          <span> Мой профиль</span>{' '}
+          <span>
+            <Link to={props.isSignedIn ? '/user/profile' : '/user/login'}>
+              Мой профиль
+            </Link>
+          </span>
         </li>
 
         <li>
           <Link
             className="btn-cta"
-            to="/login"
+            to={props.isSignedIn ? '/user/profile' : '/user/login'}
             style={{ textDecoration: 'none' }}
           >
             <span>Подать объявление</span>
@@ -36,4 +40,10 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.auth.isSignedIn,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

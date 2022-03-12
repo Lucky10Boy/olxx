@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Contacts = () => {
   return (
-    <section className="section-contacts">
+    <footer className="section-contacts" id="footer">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="128"
@@ -15,25 +15,25 @@ const Contacts = () => {
           points="224 208 32 208 32 48"
           fill="none"
           stroke="#072eed"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="16"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="16"
         ></polyline>
         <polyline
           points="208 64 128 144 96 112 32 176"
           fill="none"
           stroke="#f9e406"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="16"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="16"
         ></polyline>
         <polyline
           points="208 104 208 64 168 64"
           fill="none"
           stroke="#f50000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="16"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="16"
         ></polyline>
       </svg>
       <p>Начните бизнес в интернете с OLXX!</p>
@@ -41,7 +41,7 @@ const Contacts = () => {
       <Link className="btn-cta" to="/login" style={{ textDecoration: 'none' }}>
         <span>Подробнее...</span>
       </Link>
-    </section>
+    </footer>
   );
 };
 

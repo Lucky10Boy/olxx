@@ -14,7 +14,6 @@ const Home = () => {
     const obs = new IntersectionObserver(
       function (entries) {
         const ent = entries[0];
-        console.log(ent);
         if (ent.isIntersecting === false) {
           header.style.transform = 'translateY(0)';
         }
@@ -36,16 +35,12 @@ const Home = () => {
   });
   return (
     <div>
-      {' '}
-      <Header />{' '}
       <main>
         <div className="section-main">
-          {' '}
           <Search />
           <Categories />
+          <Products />
         </div>
-        <Products />
-        <Contacts />{' '}
       </main>
     </div>
   );

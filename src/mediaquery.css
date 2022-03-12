@@ -1,0 +1,146 @@
+/* Fixing for crashes */
+@media (max-width: 108em) {
+  .item span {
+    font-size: 1.4rem;
+  }
+  .section-products {
+    padding-left: 8.4rem;
+    padding-right: 8.4rem;
+  }
+
+  .category-circle {
+    padding: 0.8rem;
+  }
+  .category-circle-img {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+@media (max-width: 97em) {
+  .column-ul li {
+    font-size: 14rem;
+  }
+}
+
+@media (max-width: 94em) {
+  .section-categories {
+    margin: 3.2rem 8.4rem;
+  }
+
+  .icon-md {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .product-card-details {
+    font-size: 1.2rem;
+  }
+  .product-card-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .product-card-name {
+    font-size: 1.6rem;
+  }
+
+  .header-nav {
+    font-size: 1.4rem;
+  }
+
+  .svg-icon svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+@media (max-width: 79.625em) {
+  .product-card-name {
+    font-size: 1.4rem;
+    margin-bottom: 0;
+  }
+  .product-card {
+    padding: 1.2rem;
+  }
+  .search-box {
+    margin: 2.4rem;
+  }
+  .section-categories {
+    margin: 3.2rem 2.4rem;
+  }
+}
+@media (max-width: 70.5em) {
+  .product-card-price {
+    font-size: 1.4rem;
+  }
+  .product-card-details {
+    margin-bottom: 0.8rem;
+  }
+  .product-card {
+    height: 85%;
+  }
+  .product-card-image {
+    height: 50%;
+    width: 100%;
+  }
+  .product-card-price {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 59em) {
+  .product-card-name {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+  .section-products {
+    padding: 9.6rem 6.4rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .product-card-name {
+    margin-bottom: 5.2rem;
+    padding: 2.4rem 0;
+  }
+  .search-location-dropdown {
+    font-size: 1.4rem;
+  }
+  .btn-search {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 47em) {
+  .search-box {
+    margin: 1.2rem;
+    grid-template-columns: 0.9fr 0.1fr 0.5fr;
+  }
+  .search-input {
+    padding: 3rem 0;
+  }
+  .item span {
+    font-size: 1.2rem;
+  }
+  .section-categories {
+    row-gap: 4.8rem;
+  }
+  .item span {
+    margin-top: 0.4rem;
+  }
+
+  .section-header {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 42em) {
+  .item:nth-child(1) {
+    transform: translateY(0.6rem);
+  }
+  .flex {
+    display: flex;
+    overflow-x: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 3.2rem;
+  }
+}
