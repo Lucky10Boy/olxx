@@ -1,25 +1,46 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { registerNewUser } from '../actions/authActions';
+import { registerNewUserPhoneNumber } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import firebase from 'firebase/compat/app';
+import { sendToastMsg } from '../utils';
 
-const Register = (props) => {
+const RegisterPhoneNumber = (props) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!password || !passwordConfirm || password !== passwordConfirm) {
       return toast.error('Пожалуйста подтвердите пароль');
     }
-    const newUser = props.registerNewUser(name, email, password);
-    toast.success(newUser.message);
+    const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
+      size: 'invisible',
+    });
+    auth
+      .signInWithPhoneNumber(phoneNumber, recaptchaVerifier)
+      .then(function (confirmationResult) {
+        let code = prompt('Введите код', '');
+        if (code == null) return;
+        confirmationResult
+          .confirm(code)
+          .then(async function (result) {
+            console.log(result.user, 'user');
 
-    navigate('user/register/complete');
+            await props.registerNewUserPhoneNumber(name, phoneNumber, password);
+          })
+          .catch((err) => {
+            sendToastMsg('fail', 'Код неверен');
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        sendToastMsg('fail', error);
+      });
   };
 
   return (
@@ -31,7 +52,7 @@ const Register = (props) => {
           </li>
           <li>Регистрация</li>
         </ul>
-        <div className="input-box" id="register">
+        <div className="input-box">
           <label htmlFor="name">Имя</label>
           <input
             type="name"
@@ -40,13 +61,12 @@ const Register = (props) => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Укажите свое имя"
           />
-          <label htmlFor="email">Электронная почта</label>
+          <label htmlFor="phoneNumber">Номер телефона</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Укажите свою электронную почту"
+            id="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Укажите свой номер телефона"
           />
           <label htmlFor="password">Пароль</label>
           <input
@@ -64,13 +84,9 @@ const Register = (props) => {
             onChange={(e) => setPasswordConfirm(e.target.value)}
             placeholder="Подтвердите свой пароль"
           />
+          <div id="recaptcha"></div>
           <button className="btn-submit" type="submit">
-            Регистрация
-          </button>
-          <button className="btn-submit">
-            <Link to="/user/register/phone/number">
-              Регистрация с помощью телефона
-            </Link>
+            Регистрация с помощью номера телефона
           </button>
         </div>
       </form>
@@ -85,5 +101,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  registerNewUser,
-})(Register);
+  registerNewUserPhoneNumber,
+})(RegisterPhoneNumber);

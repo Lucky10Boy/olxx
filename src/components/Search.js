@@ -1,21 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { CaretRight, MagnifyingGlass, MapPin } from 'phosphor-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Search = () => {
-  useEffect(() => {
-    window.onclick = (e) => {
-      const dropdown = document.getElementById('loc-submenu');
-      if (
-        !e.target.matches('#geo-loc') &&
-        !e.target.matches('.search-location-dropdown')
-      ) {
-        if (dropdown.classList.contains('active')) {
-          dropdown.classList.remove('active');
-        }
-      }
-    };
-  });
   return (
     <section className="section-search">
       <div className="search-box">

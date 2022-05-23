@@ -8,7 +8,7 @@ const Header = (props) => {
   return (
     <header className="section-header sticky" id="sec-header">
       <Link className="header-logo" to="/">
-        <img src="../olx-logo-main.png" alt="OLX" />
+        OLXX
       </Link>
       <ul className="header-nav">
         <li>
@@ -20,7 +20,13 @@ const Header = (props) => {
         <li className="my-profile flex-center">
           <User className="icon-md" />
           <span>
-            <Link to={props.isSignedIn ? '/user/profile' : '/user/login'}>
+            <Link
+              to={
+                props.isSignedIn === false || props.isSignedIn === null
+                  ? '/user/login'
+                  : '/user/profile'
+              }
+            >
               Мой профиль
             </Link>
           </span>
@@ -43,6 +49,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
+    userInfo: state.auth.userInfo,
   };
 };
 

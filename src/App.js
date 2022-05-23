@@ -12,6 +12,13 @@ import { isSignedInFunc } from './actions/authActions';
 import NotFound404 from './components/NotFound404';
 import Profile from './components/Profile';
 import CreateProduct from './components/CreateProduct';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import LoginPhoneNumber from './components/LoginPhoneNumber';
+import RegisterPhoneNumber from './components/RegisterPhoneNumber';
+import RegisterComplete from './components/RegisterComplete';
+import SingleProduct from './components/SingleProduct';
+import UserProducts from './components/UserProducts';
 
 const App = (props) => {
   useEffect(() => {
@@ -21,27 +28,42 @@ const App = (props) => {
     <>
       <Header />
       <ToastContainer />
-      <div style={{ minHeight: '46vmax' }}>
-        <Routes>
-          <Route element={<Home />} exact path="/" />
-          <Route element={<Register />} exact path="/user/register" />
-          <Route element={<Login />} exact path="/user/login" />
-          <Route element={<Profile />} exact path="/user/profile" />
-          <Route element={<CreateProduct />} exact path="/product/create" />
-          <Route path="*" element={<NotFound404 />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route element={<Home />} exact path='/' />
+        <Route element={<Register />} exact path='/user/register' />
+        <Route
+          element={<RegisterComplete />}
+          exact
+          path='/user/register/complete'
+        />
+        <Route
+          element={<RegisterPhoneNumber />}
+          exact
+          path='/user/register/phone/number'
+        />
+        <Route element={<Login />} exact path='/user/login' />
+        <Route element={<Profile />} exact path='/user/profile' />
+        <Route
+          element={<ForgotPassword />}
+          exact
+          path='/user/forgot/password'
+        />
+        <Route element={<LoginPhoneNumber />} exact path='/user/login/phone' />
+        <Route
+          element={<ResetPassword />}
+          exact
+          path='/user/reset/password/:passwordResetToken'
+        />
+        <Route element={<CreateProduct />} exact path='/product/create' />
+        <Route element={<SingleProduct />} exact path='/product/:id' />
+        <Route element={<UserProducts />} exact path='/user/products' />
+        <Route path='*' element={<NotFound404 />} />
+      </Routes>
       <Contacts />
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isSignedIn: state.auth.isSignedIn,
-  };
-};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   isSignedInFunc,
 })(App);

@@ -9,22 +9,20 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!props.isSignedIn === false) {
-      navigate('/user/profile');
-    }
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = props.login(email, password);
+    if (data.status === 'success') {
+      sendToastMsg(data.status, data.message);
+      navigate('/user/profile');
+    }
     sendToastMsg(data.status, data.message);
   };
   return (
     <div>
-      <section className="section-register" id="sec-register">
-        <form className="form-register" onSubmit={handleSubmit}>
+      <section className="section-input" id="sec-register">
+        <form className="form-input" onSubmit={handleSubmit}>
           <ul className="titlebars titlebars-2">
             <li>Войти</li>
             <li>
@@ -40,6 +38,7 @@ const Login = (props) => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Укажите свою электронную почту"
             />
+
             <label htmlFor="password">Пароль</label>
             <input
               type="password"
@@ -52,6 +51,12 @@ const Login = (props) => {
             <button className="btn-submit" type="submit">
               Войти
             </button>
+            <button className="btn-submit" type="submit">
+              <Link to="/user/login/phone">Войти с помощью телефона</Link>
+            </button>
+            <p>
+              <Link to="/user/forgot/password">Забыли пароль</Link>
+            </p>
           </div>
         </form>
       </section>
