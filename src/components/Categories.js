@@ -46,14 +46,16 @@ const Categories = (props) => {
       <section className='section-categories' id='sec-cat'>
         {props.categories !== undefined &&
           props.categories.map((c) => (
-            <Link to={`/products/category/${c._id}`} key={c._id}>
+            <Fragment key={c._id}>
               <div className='item'>
-                <div className='category-circle'>
-                  <img src={c.image} alt='category' className='category-circle-img' />
-                </div>
-                <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
-                  {c.name}
-                </span>
+                <Link to={`/products/category/${c._id}`}>
+                  <div className='category-circle'>
+                    <img src={c.image} alt='category' className='category-circle-img' />
+                  </div>
+                  <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
+                    {c.name}
+                  </span>
+                </Link>
               </div>
               <div className='dropdown helpclass' id={c.domId}>
                 <span className='close-btn' onClick={() => closeX()}>
@@ -77,7 +79,7 @@ const Categories = (props) => {
                     )}
                 </ul>
               </div>
-            </Link>
+            </Fragment>
           ))}
       </section>
     </>
