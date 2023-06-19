@@ -48,14 +48,12 @@ const Categories = (props) => {
           props.categories.map((c) => (
             <Fragment key={c._id}>
               <div className='item'>
-                <Link to={`/products/category/${c._id}`}>
-                  <div className='category-circle'>
-                    <img src={c.image} alt='category' className='category-circle-img' />
-                  </div>
-                  <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
-                    {c.name}
-                  </span>
+                <Link to={`/products/category/${c._id}`} className='category-circle'>
+                  <img src={c.image} alt='category' className='category-circle-img' />
                 </Link>
+                <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
+                  {c.name}
+                </span>
               </div>
               <div className='dropdown helpclass' id={c.domId}>
                 <span className='close-btn' onClick={() => closeX()}>
