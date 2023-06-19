@@ -48,9 +48,9 @@ const Categories = (props) => {
           props.categories.map((c) => (
             <Fragment key={c._id}>
               <div className='item'>
-                <Link to={`/products/category/${c._id}`} className='category-circle'>
+                <div onClick={(e) => toggleDropdown(c.domId)} className='category-circle'>
                   <img src={c.image} alt='category' className='category-circle-img' />
-                </Link>
+                </div>
                 <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
                   {c.name}
                 </span>
