@@ -22,6 +22,8 @@ import EditPassword from './components/EditPassword';
 import EditPhoneNumber from './components/EditPhoneNumber';
 import ProductsBySearchTerm from './components/ProductsBySearchTerm';
 import EditProduct from './components/EditProduct';
+import CategoryProducts from './components/CategoryProducts';
+import SubCategoryProducts from './components/SubCategoryProducts';
 
 const App = (props) => {
   useEffect(() => {
@@ -51,6 +53,8 @@ const App = (props) => {
           <Route element={<EditProduct />} exact path='user/edit/product/:id' />
           <Route element={<ProductsBySearchTerm />} exact path='/search/products/:searchTerm' />
           <Route element={<CreateProduct />} exact path='/product/create' />
+          <Route element={<CategoryProducts />} exact path='/products/category/:categoryId' />
+          <Route element={<SubCategoryProducts />} exact path='/products/subcategory/:subCategoryId' />
           <Route element={<SingleProduct />} exact path='/product/:id' />
 
           <Route element={<UserProducts />} exact path='/user/products' />

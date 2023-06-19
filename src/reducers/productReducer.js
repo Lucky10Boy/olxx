@@ -26,6 +26,12 @@ import {
   PRODUCT_EDIT_REQUEST,
   PRODUCT_EDIT_SUCCESS,
   PRODUCT_EDIT_FAIL,
+  PRODUCTS_CATEGORY_GET_REQUEST,
+  PRODUCTS_CATEGORY_GET_SUCCESS,
+  PRODUCTS_CATEGORY_GET_FAIL,
+  PRODUCTS_SUBCATEGORY_GET_REQUEST,
+  PRODUCTS_SUBCATEGORY_GET_SUCCESS,
+  PRODUCTS_SUBCATEGORY_GET_FAIL,
 } from '../types';
 
 /* eslint-disable import/no-anonymous-default-export */
@@ -66,6 +72,18 @@ export default (state = {}, action) => {
     case PRODUCT_SINGLE_GET_SUCCESS:
       return { ...state, product: action.payload };
     case PRODUCT_SINGLE_GET_FAIL:
+      return { ...state, error: action.payload };
+    case PRODUCTS_CATEGORY_GET_REQUEST:
+      return { ...state };
+    case PRODUCTS_CATEGORY_GET_SUCCESS:
+      return { ...state, productsByCategory: action.payload };
+    case PRODUCTS_CATEGORY_GET_FAIL:
+      return { ...state, error: action.payload };
+    case PRODUCTS_SUBCATEGORY_GET_REQUEST:
+      return { ...state };
+    case PRODUCTS_SUBCATEGORY_GET_SUCCESS:
+      return { ...state, productsBySubCategory: action.payload };
+    case PRODUCTS_SUBCATEGORY_GET_FAIL:
       return { ...state, error: action.payload };
     case PRODUCT_RELATED_GET_REQUEST:
       return { ...state };

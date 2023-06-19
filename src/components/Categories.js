@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCategories } from '../actions/categoryActions';
 import { getAllSubCategories } from '../actions/subCategoryActions';
 import { X } from 'phosphor-react';
+import { Link } from 'react-router-dom';
 
 const Categories = (props) => {
   const toggleDropdown = (element, e) => {
@@ -30,16 +31,14 @@ const Categories = (props) => {
     props.getCategories();
     props.getAllSubCategories();
 
-    document
-      .querySelector('.section-categories')
-      .addEventListener('click', (e) => {
-        const dropdowns = document.querySelectorAll('.dropdown');
+    document.querySelector('.section-categories').addEventListener('click', (e) => {
+      const dropdowns = document.querySelectorAll('.dropdown');
 
-        for (let i = 0; i < dropdowns.length; i++) {
-          dropdowns[i].classList.remove('active-dropdown');
-          document.getElementById('sec-cat').classList.remove('row-gap-seccat');
-        }
-      });
+      for (let i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].classList.remove('active-dropdown');
+        document.getElementById('sec-cat').classList.remove('row-gap-seccat');
+      }
+    });
   }, []);
   return (
     <>
@@ -50,15 +49,9 @@ const Categories = (props) => {
             <Fragment key={c._id}>
               <div className='item'>
                 <div className='category-circle'>
-                  <img
-                    src={c.image}
-                    alt='category'
-                    className='category-circle-img'
-                  />
+                  <img src={c.image} alt='category' className='category-circle-img' />
                 </div>
-                <span
-                  className='span-nav-toggle'
-                  onClick={(e) => toggleDropdown(c.domId)}>
+                <span className='span-nav-toggle' onClick={(e) => toggleDropdown(c.domId)}>
                   {c.name}
                 </span>
               </div>
@@ -68,7 +61,7 @@ const Categories = (props) => {
                 </span>
                 <p className='submenu-title'>
                   <CaretRight className='icon-md' />
-                  Посмотреть все объявления в {c.name}
+                  <Link to={`/products/category/${c._id}`}>Посмотреть все объявления в {c.name} </Link>
                 </p>
                 <ul className='submenu'>
                   {props.subCategories &&
@@ -76,9 +69,7 @@ const Categories = (props) => {
                       c.subCategory.includes(s._id) ? (
                         <li key={s._id}>
                           <CaretRight className='icon-md' />
-                          <span>
-                            {c.subCategory.includes(s._id) ? s.name : ''}
-                          </span>
+                          <Link to={`/products/subcategory/${s._id}`}>{c.subCategory.includes(s._id) ? s.name : ''}</Link>
                         </li>
                       ) : (
                         ''
@@ -100,6 +91,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getCategories, getAllSubCategories })(
-  Categories
-);
+export default connect(mapStateToProps, { getCategories, getAllSubCategories })(Categories);

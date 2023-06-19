@@ -15,6 +15,12 @@ import {
   PRODUCT_SINGLE_GET_REQUEST,
   PRODUCT_SINGLE_GET_SUCCESS,
   PRODUCT_SINGLE_GET_FAIL,
+  PRODUCTS_CATEGORY_GET_REQUEST,
+  PRODUCTS_CATEGORY_GET_SUCCESS,
+  PRODUCTS_CATEGORY_GET_FAIL,
+  PRODUCTS_SUBCATEGORY_GET_REQUEST,
+  PRODUCTS_SUBCATEGORY_GET_SUCCESS,
+  PRODUCTS_SUBCATEGORY_GET_FAIL,
   PRODUCT_RELATED_GET_REQUEST,
   PRODUCT_RELATED_GET_SUCCESS,
   PRODUCT_RELATED_GET_FAIL,
@@ -89,7 +95,7 @@ export const getProducts = () => async (dispatch, getState) => {
     dispatch({ type: PRODUCT_GET_FAIL, payload: error });
   }
 };
-export const getSingleProduct = (id) => async (dispatch, getState) => {
+export const getSingleProduct = (id) => async (dispatch) => {
   dispatch({ type: PRODUCT_SINGLE_GET_REQUEST });
   try {
     const { data } = await axios.post(`${process.env.REACT_APP_SERVER_API}/product/single/get`, { id });
@@ -98,6 +104,28 @@ export const getSingleProduct = (id) => async (dispatch, getState) => {
   } catch (error) {
     console.log(error);
     dispatch({ type: PRODUCT_SINGLE_GET_FAIL, payload: error });
+  }
+};
+export const getProductsByCategory = (category) => async (dispatch) => {
+  dispatch({ type: PRODUCTS_CATEGORY_GET_REQUEST });
+  try {
+    const { data } = await axios.post(`${process.env.REACT_APP_SERVER_API}/category/product`, { category });
+
+    dispatch({ type: PRODUCTS_CATEGORY_GET_SUCCESS, payload: data.products });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: PRODUCTS_CATEGORY_GET_FAIL, payload: error });
+  }
+};
+export const getProductsBySubCategory = (subCategory) => async (dispatch) => {
+  dispatch({ type: PRODUCTS_SUBCATEGORY_GET_REQUEST });
+  try {
+    const { data } = await axios.post(`${process.env.REACT_APP_SERVER_API}/category/sub/product`, { subCategory });
+
+    dispatch({ type: PRODUCTS_SUBCATEGORY_GET_SUCCESS, payload: data.products });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: PRODUCTS_SUBCATEGORY_GET_FAIL, payload: error });
   }
 };
 
