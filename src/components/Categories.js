@@ -46,7 +46,7 @@ const Categories = (props) => {
       <section className='section-categories' id='sec-cat'>
         {props.categories !== undefined &&
           props.categories.map((c) => (
-            <Fragment key={c._id}>
+            <Link key={c._id}>
               <div className='item'>
                 <div className='category-circle'>
                   <img src={c.image} alt='category' className='category-circle-img' />
@@ -77,7 +77,7 @@ const Categories = (props) => {
                     )}
                 </ul>
               </div>
-            </Fragment>
+            </Link>
           ))}
       </section>
     </>
