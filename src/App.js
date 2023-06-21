@@ -32,6 +32,7 @@ const App = (props) => {
     }
     props.isSignedInFunc();
   });
+  console.log(process.env);
   return (
     <>
       <Header />
@@ -40,25 +41,25 @@ const App = (props) => {
       </div>
       <main className='main-content'>
         <Routes>
-          <Route element={<Home />} exact path='/' />
-          <Route element={<Register />} exact path='/user/register' />
-          <Route element={<RegisterComplete />} exact path='/user/register/complete' />
-          <Route element={<RegisterPhoneNumber />} exact path='/user/register/phone/number' />
-          <Route element={<Login />} exact path='/user/login' />
-          <Route element={<Profile />} exact path='/user/profile' />
-          <Route element={<ForgotPassword />} exact path='/user/forgot/password' />
-          <Route element={<LoginPhoneNumber />} exact path='/user/login/phone' />
-          <Route element={<ResetPassword />} exact path='/user/reset/password/:passwordResetToken' />
-          <Route element={<EditPhoneNumber />} exact path='/user/edit/phonenumber' />
-          <Route element={<EditProduct />} exact path='user/edit/product/:id' />
-          <Route element={<ProductsBySearchTerm />} exact path='/search/products/:searchTerm' />
-          <Route element={<CreateProduct />} exact path='/product/create' />
-          <Route element={<CategoryProducts />} exact path='/products/category/:categoryId' />
-          <Route element={<SubCategoryProducts />} exact path='/products/subcategory/:subCategoryId' />
-          <Route element={<SingleProduct />} exact path='/product/:id' />
+          <Route element={<Home />} exact path={process.env.PUBLIC_URL + '/'} />
+          <Route element={<Register />} exact path={process.env.PUBLIC_URL + '/user/register'} />
+          <Route element={<RegisterComplete />} exact path={process.env.PUBLIC_URL + '/user/register/complete'} />
+          <Route element={<RegisterPhoneNumber />} exact path={process.env.PUBLIC_URL + '/user/register/phone/number'} />
+          <Route element={<Login />} exact path={process.env.PUBLIC_URL + '/user/login'} />
+          <Route element={<Profile />} exact path={process.env.PUBLIC_URL + '/user/profile'} />
+          <Route element={<ForgotPassword />} exact path={process.env.PUBLIC_URL + '/user/forgot/password'} />
+          <Route element={<LoginPhoneNumber />} exact path={process.env.PUBLIC_URL + '/user/login/phone'} />
+          <Route element={<ResetPassword />} exact path={process.env.PUBLIC_URL + '/user/reset/password/:passwordResetToken'} />
+          <Route element={<EditPhoneNumber />} exact path={process.env.PUBLIC_URL + '/user/edit/phonenumber'} />
+          <Route element={<EditProduct />} exact path={process.env.PUBLIC_URL + 'user/edit/product/:id'} />
+          <Route element={<ProductsBySearchTerm />} exact path={process.env.PUBLIC_URL + '/search/products/:searchTerm'} />
+          <Route element={<CreateProduct />} exact path={process.env.PUBLIC_URL + '/product/create'} />
+          <Route element={<CategoryProducts />} exact path={process.env.PUBLIC_URL + '/products/category/:categoryId'} />
+          <Route element={<SubCategoryProducts />} exact path={process.env.PUBLIC_URL + '/products/subcategory/:subCategoryId'} />
+          <Route element={<SingleProduct />} exact path={process.env.PUBLIC_URL + '/product/:id'} />
 
-          <Route element={<UserProducts />} exact path='/user/products' />
-          <Route element={<EditPassword />} exact path='/user/edit/password' />
+          <Route element={<UserProducts />} exact path={process.env.PUBLIC_URL + '/user/products'} />
+          <Route element={<EditPassword />} exact path={process.env.PUBLIC_URL + '/user/edit/password'} />
           <Route path='*' element={<NotFound404 />} />
         </Routes>
       </main>
