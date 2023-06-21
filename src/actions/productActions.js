@@ -52,7 +52,7 @@ export const createProduct = (values) => async (dispatch, getState) => {
     if (data.status === 'fail') {
       dispatch({ type: PRODUCT_CREATE_FAIL });
     }
-    window.location = '/user/profile';
+    window.location = '/#/user/profile';
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
     sendToastMsg(data.status, data.message);
   } catch (error) {
@@ -76,7 +76,7 @@ export const editProduct = (values, id) => async (dispatch, getState) => {
     if (data.status === 'fail') {
       dispatch({ type: PRODUCT_EDIT_FAIL });
     }
-    window.location = '/user/profile';
+    window.location = '/#/user/profile';
     dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
     sendToastMsg(data.status, data.message);
   } catch (error) {
