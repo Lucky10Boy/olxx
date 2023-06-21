@@ -8,6 +8,7 @@ import { getSuperSubCategories } from '../actions/superSubCategoryActions';
 import { uploadImages, removeImage } from '../actions/imageActions';
 import { Spinner } from 'phosphor-react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProduct = (props) => {
   const [name, setName] = useState('');
@@ -19,8 +20,13 @@ const CreateProduct = (props) => {
   const [desc, setDesc] = useState('');
   const [loading, setLoading] = useState(false);
   let allUploadedFiles = images;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!props.user && props.user === null) {
+      localStorage.setItem('isSignedIn', 'false');
+      navigate('/user/login', { replace: true });
+    }
     props.getCategories();
     if (category !== '') {
       props.getSubCategories(category);
@@ -68,13 +74,7 @@ const CreateProduct = (props) => {
                 fontSize: '1.6rem',
               }}>
               Выбрать фото
-              <input
-                type='file'
-                accept='images/*'
-                multiple
-                hidden
-                onChange={handleUpload}
-              />
+              <input type='file' accept='images/*' multiple hidden onChange={handleUpload} />
             </label>
           </div>
           <label>Фото</label>
@@ -83,35 +83,19 @@ const CreateProduct = (props) => {
             {props.images &&
               props.images.map((image) => (
                 <>
-                  <img
-                    alt={image.public_id}
-                    key={image.public_id}
-                    src={image.url}></img>{' '}
-                  <span
-                    className='close-btn-x-badge'
-                    onClick={() => handleRemoveImage(image.public_id)}>
+                  <img alt={image.public_id} key={image.public_id} src={image.url}></img>{' '}
+                  <span className='close-btn-x-badge' onClick={() => handleRemoveImage(image.public_id)}>
                     X
                   </span>
                 </>
               ))}{' '}
           </div>
           <label>Имя</label>
-          <input
-            type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
           <label>Цена</label>
-          <input
-            type='text'
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
+          <input type='text' value={price} onChange={(e) => setPrice(e.target.value)} />
           <label>Категория</label>
-          <select
-            className='custom-select custom-select-lg mb-3'
-            style={{ width: '90%' }}
-            onChange={(e) => setCategory(e.target.value)}>
+          <select className='custom-select custom-select-lg mb-3' style={{ width: '90%' }} onChange={(e) => setCategory(e.target.value)}>
             <option value='' hidden>
               Выбирайте категорию
             </option>
@@ -156,11 +140,7 @@ const CreateProduct = (props) => {
               ))}
           </select>
           <label>Описание</label>
-          <input
-            type='text'
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-          />
+          <input type='text' value={desc} onChange={(e) => setDesc(e.target.value)} />
           <button className='btn-submit' type='submit'>
             Подать объявление
           </button>
@@ -176,6 +156,7 @@ const mapStateToProps = (state) => {
     subCategories: state.subCategory.subCategories,
     superSubCategories: state.superSubCategory.superSubCategories,
     images: state.image.images,
+    user: state.auth.userInfo,
   };
 };
 

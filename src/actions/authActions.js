@@ -172,8 +172,9 @@ export const signout = () => async (dispatch) => {
     Cookie.remove('token');
   }
   if (localStorage.getItem('user')) {
-    localStorage.removeItem('user');
     localStorage.setItem('isSignedIn', 'false');
+
+    localStorage.removeItem('user');
   }
   sendToastMsg('fail', 'Успешно вышли из аккаунта');
 

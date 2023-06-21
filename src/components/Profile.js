@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { signout } from '../actions/authActions';
 
 const Profile = (props) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!props.user && props.user === null) {
+      localStorage.setItem('isSignedIn', 'false');
+      navigate('/user/login', { replace: true });
+    }
+  });
 
   const handleClick = async (e) => {
     e.preventDefault();
