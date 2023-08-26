@@ -4,62 +4,73 @@ import firebase from 'firebase/compat/app';
 import { loginPhoneNumber } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { sendToastMsg } from '../utils';
+import { Link } from 'react-router-dom';
 
 const LoginPhoneNumber = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [codeOTP, setCodeOTP] = useState(null);
 
+  const handleCaptcha = async (e) => {
+    e.preventDefault();
+
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
+      size: 'invisible',
+      callback: function (response) {
+        document.getElementById('code').style.display = 'block';
+        document.getElementById('codeLabel').style.display = 'block';
+        document.getElementById('captchalog').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+      },
+    });
+    window.confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
+    console.log(window.confirmationResult);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
-      size: 'invisible',
-    });
-
-    auth
-      .signInWithPhoneNumber(phoneNumber, recaptchaVerifier)
-      .then(function (confirmationResult) {
-        let code = prompt('Введите код', '');
-        if (code == null) return;
-        confirmationResult
-          .confirm(code)
-          .then(async function (result) {
-            await props.loginPhoneNumber(phoneNumber, password);
-          })
-          .catch((err) => {
-            sendToastMsg('fail', 'Код неверен');
-          });
+    if (codeOTP === null) return;
+    window.confirmationResult
+      .confirm(codeOTP)
+      .then(async function (result) {
+        console.log(result);
+        await props.loginPhoneNumber(phoneNumber, password);
       })
-      .catch((error) => {
-        console.log(error);
-        sendToastMsg('fail', error);
+      .catch((err) => {
+        sendToastMsg('fail', 'Код неверен');
+        window.location.reload();
       });
   };
-
   return (
-    <section className='section-input'>
-      <form className='form-input' onSubmit={handleSubmit}>
-        <div className='input-box'>
-          <label htmlFor='phoneNumber'>Номер телефона</label>
-          <input
-            id='phoneNumber'
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder='Укажите свой номер телефона'
-          />
-          <label htmlFor='password'>Пароль</label>
-          <input
-            id='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder='Укажите свой пароль'
-          />
-          <button type='submit' className='btn-submit'>
-            Войти с помощью телефона
-          </button>
-          <div id='recaptcha'></div>
-        </div>
-      </form>
-    </section>
+    <div className='input-content'>
+      <div className='section-input' id='sec-register'>
+        {' '}
+        <form className='form-input' onSubmit={handleCaptcha}>
+          <ul className='titlebars titlebars-2'>
+            <li>Войти</li>
+            <li>
+              <Link to='/user/register'>Регистрация</Link>
+            </li>
+          </ul>
+          <div className='input-box'>
+            <label htmlFor='phoneNumber'>Номер телефона</label>
+            <input id='phoneNumber' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder='Укажите свой номер телефона' />
+            <label htmlFor='password'>Пароль</label>
+            <input id='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Укажите свой пароль' />
+            <label htmlFor='code' id='codeLabel'>
+              Код был отправлен на ваш номер телефона
+            </label>
+            <div id='recaptcha'></div>
+            <input id='code' value={codeOTP} onChange={(e) => setCodeOTP(e.target.value)} placeholder='Введите код' />
+            <button type='submit' id='captchalog' className='btn-submit'>
+              Отправить код
+            </button>
+            <button className='btn-submit' id='login' onClick={handleSubmit} style={{ display: 'none' }}>
+              Войти
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

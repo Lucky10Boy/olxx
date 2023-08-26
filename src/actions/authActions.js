@@ -145,7 +145,6 @@ export const loginPhoneNumber = (phoneNumber, password) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: { ...data.user, token },
     });
-    window.location = '/#/';
     sendToastMsg(data.status, data.message);
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response });

@@ -552,6 +552,13 @@ a {
   border-bottom: 3px solid #002f32;
 }
 
+#code {
+  display: none;
+}
+#codeLabel {
+  display: none;
+}
+
 .input-box {
   display: flex;
   /* align-items: center; */

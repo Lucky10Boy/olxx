@@ -14,23 +14,18 @@ const Header = () => {
   return (
     <header className='section-header sticky' id='sec-header'>
       <Link className='header-logo' to='/'>
-        OLXX
+        BOZORTOY
       </Link>
       <ul className='header-nav'>
         <li className='my-profile flex-center'>
           <User className='icon-md' />
           <span>
-            <Link to={isSignedIn === 'true' ? '/user/profile' : '/user/login'}>
-              Мой профиль
-            </Link>
+            <Link to={isSignedIn === 'true' ? '/user/profile' : '/user/login'}>Мой профиль</Link>
           </span>
         </li>
 
         <li>
-          <Link
-            className='btn-cta'
-            to={isSignedIn === 'true' ? '/product/create' : '/user/login'}
-            style={{ textDecoration: 'none' }}>
+          <Link className='btn-cta' to={isSignedIn === 'true' ? '/product/create' : '/user/login'} style={{ textDecoration: 'none' }}>
             <span>Подать объявление</span>
           </Link>
         </li>

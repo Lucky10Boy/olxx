@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { registerNewUser } from '../actions/authActions';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Register = (props) => {
   const [name, setName] = useState('');

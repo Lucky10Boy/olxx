@@ -24,6 +24,7 @@ import ProductsBySearchTerm from './components/ProductsBySearchTerm';
 import EditProduct from './components/EditProduct';
 import CategoryProducts from './components/CategoryProducts';
 import SubCategoryProducts from './components/SubCategoryProducts';
+import Helmet from 'react-helmet';
 
 const App = (props) => {
   useEffect(() => {
@@ -36,6 +37,10 @@ const App = (props) => {
   return (
     <>
       <Header />
+      <Helmet>
+        <title>Bozortoy - место для ваших объявлений</title>
+        <meta name='description' content='Bozortoy - все объявления в одном месте'></meta>
+      </Helmet>
       <div>
         <ToastContainer theme='colored' />
       </div>

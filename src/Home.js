@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Categories from './components/Categories';
 import Products from './components/Products';
 import SearchProducts from './components/SearchProducts';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   useEffect(() => {
@@ -15,10 +16,7 @@ const Home = () => {
         if (ent.isIntersecting === false) {
           header.style.transform = 'translateY(0)';
         }
-        if (
-          ent.isIntersecting === true &&
-          header.classList.contains('sticky')
-        ) {
+        if (ent.isIntersecting === true && header.classList.contains('sticky')) {
           header.style.transform = 'translateY(0)';
         }
       },
@@ -33,6 +31,10 @@ const Home = () => {
   });
   return (
     <main className='section-main'>
+      <Helmet>
+        <title>Bozortoy - место для ваших объявлений</title>
+        <meta name='description' content='Bozortoy - все объявления в одном месте'></meta>
+      </Helmet>
       <SearchProducts />
       <Categories />
       <Products />
