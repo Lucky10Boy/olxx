@@ -23,6 +23,7 @@ a {
 }
 a:hover {
   text-decoration: none;
+  color: #000;
 }
 
 html {
@@ -470,7 +471,11 @@ a {
   background-color: #fff;
   padding: 1.6rem;
   border-radius: 1%;
+  transition: transform 0.3s;
   color: #000;
+}
+.product-card:hover {
+  transform: translateY(-1.5rem) scale(1.03);
 }
 .section-products a {
   text-decoration: none;
@@ -583,7 +588,7 @@ a {
 }
 .form-input label {
   font-size: inherit;
-  color: rgba(0, 0, 0, 0.733);
+  color: #000;
   text-align: left;
 }
 

@@ -42,11 +42,11 @@ export const registerComplete = (emailVerificationCode) => async (dispatch) => {
     Cookie.set('token', data.token);
     if (data.status === 'fail') {
       dispatch({ type: REGISTER_COMPLETE_FAIL, payload: { ...data } });
-      localStorage.setItem('isSigned', 'false');
+      localStorage.setItem('isSignedIn', 'false');
     }
     const user = JSON.stringify(data.user);
     localStorage.setItem('user', user);
-    localStorage.setItem('isSigned', 'true');
+    localStorage.setItem('isSignedIn', 'true');
     dispatch({ type: REGISTER_COMPLETE_SUCCESS, payload: data.token });
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {

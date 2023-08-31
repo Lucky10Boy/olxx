@@ -20,7 +20,7 @@ const Header = () => {
         <li className='my-profile flex-center'>
           <User className='icon-md' />
           <span>
-            <Link to={isSignedIn === 'true' ? '/user/profile' : '/user/login'}>Мой профиль</Link>
+            <Link to={isSignedIn === 'true' ? '/user/profile' : '/user/login/phone'}>Профиль</Link>
           </span>
         </li>
 

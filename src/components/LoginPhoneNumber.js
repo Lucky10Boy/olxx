@@ -30,6 +30,8 @@ const LoginPhoneNumber = (props) => {
     if (phoneNumber.length === 9) {
       setPhoneNumber('+998' + phoneNumber);
       window.phoneNumber = '+998' + phoneNumber;
+    } else {
+      window.phoneNumber = phoneNumber;
     }
 
     window.confirmationResult = await auth.signInWithPhoneNumber(window.phoneNumber, window.recaptchaVerifier);
@@ -55,11 +57,11 @@ const LoginPhoneNumber = (props) => {
     <div className='input-content'>
       <div className='section-input' id='sec-register'>
         {' '}
-        <form className='form-input' onSubmit={handleCaptcha}>
+        <form className='form-input'>
           <ul className='titlebars titlebars-2'>
             <li>Войти</li>
             <li>
-              <Link to='/user/register'>Регистрация</Link>
+              <Link to='/user/register/phone/number'>Регистрация</Link>
             </li>
           </ul>
           <div className='input-box'>
@@ -72,7 +74,10 @@ const LoginPhoneNumber = (props) => {
             </label>
             <div id='recaptcha'></div>
             <input id='code' value={codeOTP} onChange={(e) => setCodeOTP(e.target.value)} placeholder='Введите код' />
-            <button type='submit' id='captchalog' className='btn-submit'>
+            <Link to='/user/login'>
+              <button className='btn-submit-white'>Войти с электронной почтой</button>
+            </Link>
+            <button onClick={handleCaptcha} id='captchalog' className='btn-submit'>
               Отправить код
             </button>
             <button className='btn-submit' id='login' onClick={handleSubmit} style={{ display: 'none' }}>

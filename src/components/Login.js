@@ -14,11 +14,11 @@ const Login = (props) => {
   return (
     <div className='input-content'>
       <div className='section-input' id='sec-register'>
-        <form className='form-input' onSubmit={handleSubmit}>
+        <form className='form-input'>
           <ul className='titlebars titlebars-2'>
             <li>Войти</li>
             <li>
-              <Link to='/user/register'>Регистрация</Link>
+              <Link to='/user/register/phone/number'>Регистрация</Link>
             </li>
           </ul>
           <div className='input-box'>
@@ -30,11 +30,10 @@ const Login = (props) => {
             <Link to='/user/forgot/password'>
               <b className='forgot-pass'>Забыли пароль</b>
             </Link>
-
-            <button className='btn-submit-white' type='submit'>
-              <Link to='/user/login/phone'>Войти с помощью телефона</Link>
-            </button>
-            <button className='btn-submit' type='submit'>
+            <Link to='/user/login/phone'>
+              <button className='btn-submit-white'>Войти с помощью телефона</button>
+            </Link>
+            <button className='btn-submit' onClick={handleSubmit}>
               Войти
             </button>
           </div>

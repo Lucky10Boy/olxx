@@ -138,7 +138,7 @@
 }
 @media (max-width: 37.45em) {
   html {
-    font-size: 30%;
+    font-size: 40%;
   }
   .col-1-of-3 {
     width: calc((100% - 0rem) / 2);
@@ -171,15 +171,37 @@
   }
 }
 @media (max-width: 31.25em) {
+  html {
+    font-size: 35%;
+  }
+  .header-nav {
+    gap: 4.5rem;
+  }
 }
 
 @media (max-width: 25em) {
-  .category-circle img {
+  html .category-circle img {
     height: 2.4rem;
     width: 2.4rem;
+  }
+  .header-nav {
+    gap: 2.5rem;
   }
 
   .header-logo {
     font-size: 2.5rem;
+  }
+}
+@media (max-width: 18.75em) {
+  html {
+    font-size: 30%;
+  }
+  .header-nav {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 13.5em) {
+  .header-nav {
+    font-size: 1.4rem;
   }
 }

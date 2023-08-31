@@ -20,15 +20,17 @@ const Register = (props) => {
     const newUser = props.registerNewUser(name, email, password);
     toast.success(newUser.message);
 
-    navigate('/complete');
+    setTimeout(() => {
+      navigate('/user/register/complete');
+    }, 3000);
   };
 
   return (
     <section className='section-input' id='sec-register'>
-      <form className='form-input' onSubmit={handleSubmit}>
+      <form className='form-input'>
         <ul className='titlebars titlebars-1'>
           <li>
-            <Link to='/user/login'>Войти</Link>
+            <Link to='/user/login/phone/number'>Войти</Link>
           </li>
           <li>Регистрация</li>
         </ul>
@@ -47,11 +49,11 @@ const Register = (props) => {
             onChange={(e) => setPasswordConfirm(e.target.value)}
             placeholder='Подтвердите свой пароль'
           />
-          <button className='btn-submit' type='submit'>
+          <Link to='/user/register/phone/number'>
+            <button className='btn-submit-white'>Регистрация с помощью телефона</button>
+          </Link>
+          <button className='btn-submit' onClick={handleSubmit}>
             Регистрация
-          </button>
-          <button className='btn-submit'>
-            <Link to='/user/register/phone/number'>Регистрация с помощью телефона</Link>
           </button>
         </div>
       </form>

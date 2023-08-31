@@ -9,7 +9,7 @@ import { sendToastMsg } from '../utils';
 
 const RegisterPhoneNumber = (props) => {
   const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('+998');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [codeOTP, setCodeOTP] = useState(null);
@@ -36,6 +36,8 @@ const RegisterPhoneNumber = (props) => {
     if (phoneNumber.length === 9) {
       setPhoneNumber('+998' + phoneNumber);
       window.phoneNumber = '+998' + phoneNumber;
+    } else {
+      window.phoneNumber = phoneNumber;
     }
 
     window.confirmationResult = await auth.signInWithPhoneNumber(window.phoneNumber, window.recaptchaVerifier);
@@ -59,10 +61,10 @@ const RegisterPhoneNumber = (props) => {
   };
   return (
     <section className='section-input' id='sec-register'>
-      <form className='form-input' onSubmit={handleCaptcha}>
+      <form className='form-input'>
         <ul className='titlebars titlebars-1'>
           <li>
-            <Link to='/user/login'>Войти</Link>
+            <Link to='/user/login/phone'>Войти</Link>
           </li>
           <li>Регистрация</li>
         </ul>
@@ -86,11 +88,14 @@ const RegisterPhoneNumber = (props) => {
           </label>
           <div id='recaptcha'></div>
           <input id='code' value={codeOTP} onChange={(e) => setCodeOTP(e.target.value)} placeholder='Введите код' />
-          <button type='submit' id='captchalog' className='btn-submit'>
+          <Link to='/user/register'>
+            <button className='btn-submit-white'>Регистрация с электронной почтой</button>
+          </Link>
+          <button id='captchalog' className='btn-submit' onClick={handleCaptcha}>
             Отправить код
           </button>
           <button className='btn-submit' id='login' onClick={handleSubmit} style={{ display: 'none' }}>
-            Войти
+            Регистрация
           </button>
         </div>
       </form>
