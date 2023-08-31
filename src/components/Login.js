@@ -27,16 +27,16 @@ const Login = (props) => {
 
             <label htmlFor='password'>Пароль</label>
             <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Link to='/user/forgot/password'>
+              <b className='forgot-pass'>Забыли пароль</b>
+            </Link>
 
+            <button className='btn-submit-white' type='submit'>
+              <Link to='/user/login/phone'>Войти с помощью телефона</Link>
+            </button>
             <button className='btn-submit' type='submit'>
               Войти
             </button>
-            <button className='btn-submit' type='submit'>
-              <Link to='/user/login/phone'>Войти с помощью телефона</Link>
-            </button>
-            <p>
-              <Link to='/user/forgot/password'>Забыли пароль</Link>
-            </p>
           </div>
         </form>
       </div>

@@ -25,7 +25,7 @@ const Header = () => {
         </li>
 
         <li>
-          <Link className='btn-cta' to={isSignedIn === 'true' ? '/product/create' : '/user/login'} style={{ textDecoration: 'none' }}>
+          <Link className='btn-cta' to={isSignedIn === 'true' ? '/product/create' : '/user/login/phone'} style={{ textDecoration: 'none' }}>
             <span>Подать объявление</span>
           </Link>
         </li>

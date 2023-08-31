@@ -7,7 +7,7 @@ import { sendToastMsg } from '../utils';
 import { Link } from 'react-router-dom';
 
 const LoginPhoneNumber = (props) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('+998');
   const [password, setPassword] = useState('');
   const [codeOTP, setCodeOTP] = useState(null);
 
@@ -21,11 +21,21 @@ const LoginPhoneNumber = (props) => {
         document.getElementById('codeLabel').style.display = 'block';
         document.getElementById('captchalog').style.display = 'none';
         document.getElementById('login').style.display = 'block';
+        sendToastMsg('success', 'Код отправлен в ваш номер телефона');
       },
     });
-    window.confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
+    document.getElementById('phoneNumber').setAttribute('disabled', 'true');
+    document.getElementById('password').setAttribute('disabled', 'true');
+
+    if (phoneNumber.length === 9) {
+      setPhoneNumber('+998' + phoneNumber);
+      window.phoneNumber = '+998' + phoneNumber;
+    }
+
+    window.confirmationResult = await auth.signInWithPhoneNumber(window.phoneNumber, window.recaptchaVerifier);
     console.log(window.confirmationResult);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (codeOTP === null) return;
@@ -40,6 +50,7 @@ const LoginPhoneNumber = (props) => {
         window.location.reload();
       });
   };
+
   return (
     <div className='input-content'>
       <div className='section-input' id='sec-register'>

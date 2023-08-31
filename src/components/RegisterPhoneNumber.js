@@ -13,6 +13,7 @@ const RegisterPhoneNumber = (props) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [codeOTP, setCodeOTP] = useState(null);
+  console.log(phoneNumber);
 
   const handleCaptcha = async (e) => {
     e.preventDefault();
@@ -28,7 +29,16 @@ const RegisterPhoneNumber = (props) => {
         document.getElementById('login').style.display = 'block';
       },
     });
-    window.confirmationResult = await auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
+
+    document.getElementById('phoneNumber').setAttribute('disabled', 'true');
+    document.getElementById('password').setAttribute('disabled', 'true');
+
+    if (phoneNumber.length === 9) {
+      setPhoneNumber('+998' + phoneNumber);
+      window.phoneNumber = '+998' + phoneNumber;
+    }
+
+    window.confirmationResult = await auth.signInWithPhoneNumber(window.phoneNumber, window.recaptchaVerifier);
     console.log(window.confirmationResult);
   };
   const handleSubmit = (e) => {

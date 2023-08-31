@@ -9,7 +9,7 @@ const Profile = (props) => {
   useEffect(() => {
     if (!props.user && props.user === null) {
       localStorage.setItem('isSignedIn', 'false');
-      navigate('/user/login', { replace: true });
+      navigate('/user/login/phone', { replace: true });
     }
   });
 
